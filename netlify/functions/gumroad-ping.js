@@ -72,6 +72,9 @@ exports.handler = async (event) => {
       ]
     };
 
+    // Add test event code for debugging (REMOVE THIS LINE after confirming it works)
+    eventData.test_event_code = 'TEST28232';
+
     // Send to Meta Conversions API
     const metaUrl = `https://graph.facebook.com/${API_VERSION}/${PIXEL_ID}/events?access_token=${ACCESS_TOKEN}`;
 
