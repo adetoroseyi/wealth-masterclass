@@ -41,7 +41,7 @@ exports.handler = async (event) => {
 
     // Extract sale data
     const email = data.email || '';
-    const price = parseFloat(data.price) || 29.00;
+    const price = (parseFloat(data.price) || 2900) / 100;
     const productName = data.product_name || 'Wealth Masterclass';
     const saleId = data.sale_id || '';
     const ipAddress = data.ip_country || '';
