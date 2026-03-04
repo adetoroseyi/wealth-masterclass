@@ -186,7 +186,7 @@ exports.handler = async (event) => {
       return { statusCode: 200, body: 'OK' };
     }
 
-    console.log('Webhook received:', JSON.stringify(body).substring(0, 500));
+    console.log('Webhook received:', JSON.stringify(body).substring(0, 1000));
 
     if (body.object !== 'page') {
       return { statusCode: 200, body: 'Not a page event' };
@@ -198,14 +198,29 @@ exports.handler = async (event) => {
 
         const value = change.value || {};
 
+        console.log('Feed event:', JSON.stringify({
+          item: value.item,
+          verb: value.verb,
+          comment_id: value.comment_id,
+          parent_id: value.parent_id,
+          post_id: value.post_id,
+          from: value.from,
+          message: value.message
+        }));
+
+        // Only process new comments (not edits, deletes, or posts)
         if (value.item !== 'comment' || value.verb !== 'add') continue;
 
+        // Don't reply to our own comments (from the page itself)
         if (value.from && value.from.id === PAGE_ID) {
           console.log('Skipping — comment is from our own page');
           continue;
         }
 
-        if (value.parent_id) {
+        // Only skip replies-to-replies (where parent_id is a COMMENT, not a POST)
+        // Top-level comments have parent_id equal to the post_id
+        // Replies to comments have parent_id equal to another comment_id
+        if (value.parent_id && value.post_id && value.parent_id !== value.post_id) {
           console.log('Skipping — comment is a reply to another comment');
           continue;
         }
@@ -214,8 +229,14 @@ exports.handler = async (event) => {
         const commentText = value.message || '';
         const commenterName = value.from ? value.from.name : '';
 
-        console.log(`New comment from ${commenterName}: "${commentText.substring(0, 100)}"`);
+        if (!commentId) {
+          console.log('Skipping — no comment_id found');
+          continue;
+        }
 
+        console.log(`Processing comment from ${commenterName}: "${commentText.substring(0, 100)}"`);
+
+        // Rate limit and duplicate checks
         if (isDuplicate(commentId)) {
           console.log('Skipping — duplicate comment');
           continue;
@@ -226,16 +247,20 @@ exports.handler = async (event) => {
           continue;
         }
 
+        // Small random delay (1-3 seconds) to look natural
         const delay = 1000 + Math.floor(Math.random() * 2000);
         await new Promise(resolve => setTimeout(resolve, delay));
 
+        // Step 1: Like the comment
         await likeComment(commentId, ACCESS_TOKEN);
 
+        // Step 2: Pick the right reply
         let replyMessage = getKeywordReply(commentText);
         if (!replyMessage) {
           replyMessage = getGenericReply();
         }
 
+        // Step 3: Post the reply
         const replyId = await replyToComment(commentId, replyMessage, ACCESS_TOKEN);
 
         if (replyId) {
