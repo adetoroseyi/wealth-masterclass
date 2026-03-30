@@ -53,7 +53,7 @@ exports.handler = async (event) => {
           event_name: 'Purchase',
           event_time: Math.floor(Date.now() / 1000),
           event_id: saleId || `gumroad_${Date.now()}`,
-          event_source_url: process.env.SITE_URL || 'https://thriverichly.netlify.app',
+          event_source_url: process.env.SITE_URL || 'https://thriverichly.com',
           action_source: 'website',
           user_data: {
             em: email ? [hashSHA256(email)] : [],

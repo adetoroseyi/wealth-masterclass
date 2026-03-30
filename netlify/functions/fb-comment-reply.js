@@ -20,7 +20,7 @@ const API_VERSION = 'v25.0';
 // ── Product URLs ─────────────────────────────────────────────────
 const FREE_GUIDE_URL = 'https://thriverichly.gumroad.com/l/freethriverichly';
 const WEALTH_BLUEPRINT_URL = 'https://thriverichly.gumroad.com/l/thriverichly';
-const WEALTH_MASTERCLASS_URL = 'https://thriverichly.netlify.app/';
+const WEALTH_MASTERCLASS_URL = 'https://thriverichly.com/';
 
 // ── Reply Templates (generic — no keyword detected) ──────────────
 const REPLY_TEMPLATES = [
