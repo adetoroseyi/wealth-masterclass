@@ -144,12 +144,40 @@ section{padding:80px 0}@media(max-width:640px){section{padding:56px 0}}
 .case-story{font-size:13px;color:var(--text-muted);line-height:1.6;margin-bottom:14px}
 .case-name{font-size:13px;font-weight:600;color:var(--text)}.case-detail{font-size:12px;color:var(--text-muted)}
 .founder{background:var(--dark-surface)}
-.founder-inner{max-width:600px;margin:0 auto}
-.founder h2{font-family:'DM Serif Display',serif;font-size:clamp(26px,3.5vw,36px);margin-bottom:28px;color:#fff;text-align:center}
+.founder-inner{max-width:620px;margin:0 auto}
+.founder h2{font-family:'DM Serif Display',serif;font-size:clamp(26px,3.5vw,36px);margin-bottom:36px;color:#fff;text-align:center}
+.founder-profile{display:flex;align-items:flex-start;gap:28px;margin-bottom:28px}
+@media(max-width:640px){.founder-profile{flex-direction:column;align-items:center;text-align:center}}
+.founder-avatar{flex-shrink:0;width:100px;height:100px;border-radius:50%;border:3px solid var(--gold-border);background:linear-gradient(135deg,#1e2328,#2a3040);display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 0 0 6px var(--gold-glow)}
+.founder-avatar svg{width:64px;height:64px}
+.founder-info{padding-top:6px}
+.founder-name{font-family:'DM Serif Display',serif;font-size:22px;color:#fff;margin-bottom:4px}
+.founder-role{font-size:13px;color:var(--gold);font-weight:600;margin-bottom:12px;letter-spacing:.3px}
+.founder-creds{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:0}
+@media(max-width:640px){.founder-creds{justify-content:center}}
+.founder-cred{font-size:11px;color:var(--text-muted);background:rgba(255,255,255,.04);border:1px solid var(--dark-border);padding:3px 10px;border-radius:100px}
 .founder p{font-size:16px;color:var(--text-muted);line-height:1.8;margin-bottom:16px}
 .founder p strong{color:var(--text)}
 .founder-sig{margin-top:24px;font-weight:600;color:var(--gold);font-size:16px}
 .founder-title{font-size:13px;color:var(--text-muted)}
+/* Email capture */
+.email-capture{background:linear-gradient(180deg,var(--dark) 0%,var(--dark-surface) 100%)}
+.email-capture-box{max-width:560px;margin:0 auto;text-align:center;background:var(--dark-card);border:1px solid var(--gold-border);border-radius:16px;padding:48px 40px}
+@media(max-width:640px){.email-capture-box{padding:36px 24px}}
+.email-capture-badge{display:inline-block;background:var(--gold-glow);border:1px solid var(--gold-border);color:var(--gold);font-size:11px;font-weight:700;padding:4px 14px;border-radius:100px;margin-bottom:16px;letter-spacing:.8px;text-transform:uppercase}
+.email-capture h2{font-family:'DM Serif Display',serif;font-size:clamp(24px,3.5vw,34px);color:#fff;margin-bottom:12px;line-height:1.2}
+.email-capture .lead{font-size:15px;color:var(--text-muted);margin-bottom:8px;line-height:1.6}
+.email-capture .lead-magnet-label{font-size:13px;color:var(--gold);font-weight:600;margin-bottom:28px;display:block}
+.email-form{display:flex;gap:10px;margin-bottom:12px}
+@media(max-width:540px){.email-form{flex-direction:column}}
+.email-input{flex:1;background:var(--dark);border:1px solid var(--dark-border);border-radius:8px;padding:14px 18px;font-size:15px;color:var(--text);font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s}
+.email-input::placeholder{color:var(--text-muted)}
+.email-input:focus{border-color:var(--gold-border)}
+.email-submit-btn{background:var(--gold);color:#0B0E11;font-family:'DM Sans',sans-serif;font-weight:700;font-size:15px;padding:14px 24px;border-radius:8px;border:none;cursor:pointer;white-space:nowrap;transition:all .2s}
+.email-submit-btn:hover{background:var(--gold-light)}
+.email-privacy{font-size:12px;color:var(--text-muted)}
+.email-success{display:none;text-align:center;padding:16px;background:var(--green-glow);border:1px solid rgba(52,211,153,.25);border-radius:8px;color:var(--green);font-weight:600;font-size:15px}
+.email-success.visible{display:block}
 .audience h2{font-family:'DM Serif Display',serif;font-size:clamp(28px,4vw,40px);text-align:center;margin-bottom:48px;color:#fff}
 .audience-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}@media(max-width:640px){.audience-grid{grid-template-columns:1fr}}
 .audience-col{background:var(--dark-card);border:1px solid var(--dark-border);border-radius:var(--radius);padding:28px 24px}
@@ -364,15 +392,54 @@ footer a{color:var(--gold);text-decoration:none}
   </div>
 </section>
 
+<section class="email-capture">
+  <div class="container">
+    <div class="email-capture-box">
+      <div class="email-capture-badge">&#127381; Free Download</div>
+      <h2>Get the Free $1K Savings<br>Quick-Start Blueprint</h2>
+      <p class="lead">The 1-page cheat sheet that shows you exactly where to find your first $1,000 to save — even on a tight budget.</p>
+      <span class="lead-magnet-label">&#128274; Sent instantly to your inbox. No spam, ever.</span>
+      <form class="email-form" id="lead-magnet-form" novalidate>
+        <input type="email" class="email-input" id="lead-email" placeholder="Enter your email address" required aria-label="Email address">
+        <button type="submit" class="email-submit-btn">Send It Free &rarr;</button>
+      </form>
+      <div class="email-success" id="email-success" role="alert">
+        &#10003; Check your inbox — your blueprint is on the way!
+      </div>
+      <p class="email-privacy">&#128274; Your details are safe. Unsubscribe anytime.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
 <section class="founder">
   <div class="container">
     <div class="founder-inner">
-      <h2>Why I Created This</h2>
-      <p>I spent years consuming every finance book, podcast, and course I could find. <strong>Most of them gave me information. None of them gave me a system.</strong></p>
-      <p>So I built one. I tested it on myself, refined it over years, and turned it into the exact step-by-step framework I wish someone had handed me when I started.</p>
-      <p><strong>The Wealth Masterclass isn't theory.</strong> It's the practical, no-fluff system that actually works — whether you're starting from zero or starting over.</p>
-      <div class="founder-sig">— The Thrive Richly Team</div>
-      <div class="founder-title">Creators of the THRIVE Framework</div>
+      <h2>A Note From the Founder</h2>
+      <div class="founder-profile">
+        <div class="founder-avatar" aria-label="Founder photo">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="32" cy="24" r="13" fill="#D4A843" opacity="0.85"/>
+            <ellipse cx="32" cy="54" rx="22" ry="14" fill="#D4A843" opacity="0.5"/>
+          </svg>
+        </div>
+        <div class="founder-info">
+          <div class="founder-name">Ade Seyi</div>
+          <div class="founder-role">Founder, Thrive Richly</div>
+          <div class="founder-creds">
+            <span class="founder-cred">&#128218; Finance educator</span>
+            <span class="founder-cred">&#9889; THRIVE Framework creator</span>
+            <span class="founder-cred">&#127757; 3,000+ students</span>
+          </div>
+        </div>
+      </div>
+      <p>At 24, I was earning decent money and had absolutely nothing to show for it. No savings, no investments — just a bank account that reset to near-zero every month. I was embarrassed to admit it.</p>
+      <p>I consumed every finance book, podcast, and YouTube channel I could find. <strong>They gave me information. None of them gave me a system I could actually follow.</strong></p>
+      <p>So I built one. I tracked every variable that moved the needle, cut what didn't matter, and slowly assembled a step-by-step framework that actually worked. In 28 months, I went from zero net worth to crossing $100K.</p>
+      <p><strong>The Wealth Masterclass is that system</strong> — documented, refined, and designed so you can follow it even if you're starting from scratch right now.</p>
+      <div class="founder-sig">— Ade Seyi</div>
+      <div class="founder-title">Founder, Thrive Richly &middot; Creator of the THRIVE Framework</div>
     </div>
   </div>
 </section>
@@ -497,6 +564,40 @@ footer a{color:var(--gold);text-decoration:none}
         fbq('trackCustom', 'TimeOnPage', { seconds: seconds, page: 'wealth_masterclass_lp' });
       }
     }, seconds * 1000);
+  });
+})();
+
+// =====================================================
+// EMAIL LEAD MAGNET FORM
+// =====================================================
+(function() {
+  var form = document.getElementById('lead-magnet-form');
+  if (!form) return;
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var emailInput = document.getElementById('lead-email');
+    var email = emailInput ? emailInput.value.trim() : '';
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      emailInput && emailInput.focus();
+      return;
+    }
+    var btn = form.querySelector('.email-submit-btn');
+    if (btn) { btn.disabled = true; btn.textContent = 'Sending...'; }
+    fetch('/.netlify/functions/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email, source: 'lead_magnet_blueprint' })
+    })
+    .then(function(res) { return res.json(); })
+    .catch(function() { return {}; })
+    .finally(function() {
+      form.style.display = 'none';
+      var success = document.getElementById('email-success');
+      if (success) success.classList.add('visible');
+      if (typeof fbq === 'function') {
+        fbq('track', 'Lead', { content_name: '1K Blueprint Lead Magnet', content_category: 'email_capture' });
+      }
+    });
   });
 })();
 
