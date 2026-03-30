@@ -1,0 +1,22 @@
+{
+  "name": "wealth-masterclass-video",
+  "version": "1.0.0",
+  "description": "Remotion video ads for Thrive Richly / Wealth Masterclass",
+  "scripts": {
+    "start": "remotion studio",
+    "render": "remotion render src/index.ts WealthStatReveal out/stat-reveal.mp4",
+    "build": "npm run render"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.441",
+    "@remotion/transitions": "^4.0.441",
+    "remotion": "^4.0.441"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "typescript": "^6.0.2"
+  }
+}
