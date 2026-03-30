@@ -1,0 +1,15 @@
+[build]
+  functions = "netlify/functions"
+
+[[redirects]]
+  from = "https://www.thriverichly.com/*"
+  to = "https://thriverichly.com/:splat"
+  status = 301
+  force = true
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
